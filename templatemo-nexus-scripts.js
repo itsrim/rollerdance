@@ -539,3 +539,217 @@ https://templatemo.com/tm-594-nexus-flow
                 }, 2000);
             }
         });
+
+        // Translation System
+        const translations = {
+            fr: {
+                // Navigation
+                'nav-video': 'Video',
+                'nav-courses': 'Cours',
+                'nav-info': 'Informations',
+                'nav-news': 'Actualités',
+                'nav-contact': 'Contact',
+                'join': 'Rejoindre',
+                
+                // Hero Section
+                'hero-subtitle-1': 'Section Roller Dance du club <a href="https://bscroller.fr/">https://bscroller.fr/</a>',
+                'hero-subtitle-2': 'Découvrez le roller dance à Toulouse. Une discipline qui allie style, grâce, technique, sport et passion depuis plusieurs décennies.',
+                'hero-btn-discover': 'Découvrir les Techniques',
+                'hero-btn-join': 'Nous Rejoindre',
+                
+                // Features Section
+                'features-title': 'Cours de Roller Dance',
+                'features-subtitle': 'Les bases essentielles du roller dance et du patinage artistique à Toulouse : équilibre, style et maîtrise technique',
+                'feature-balance': 'Équilibre & Stabilité',
+                'feature-balance-desc': 'Maîtrisez l\'art de l\'équilibre sur roulettes. Techniques de base pour développer votre stabilité et votre confiance sur les patins.',
+                'feature-choreography': 'Chorégraphie',
+                'feature-choreography-desc': 'Créez des enchaînements funs, fluides et gracieux. Apprenez à synchroniser vos mouvements avec la musique pour des performances époustouflantes.',
+                'feature-spins': 'Pirouettes & Tours',
+                'feature-spins-desc': 'Techniques avancées de rotation et de pivot. Développez votre capacité à exécuter des figures complexes avec précision.',
+                'feature-artistic': 'Expression Artistique',
+                'feature-artistic-desc': 'Libérez votre créativité et développez votre style personnel. L\'art du roller dance va bien au-delà de la technique pure.',
+                'feature-technique': 'Technique',
+                'feature-technique-desc': 'Des techniques de patinage fondamentales pour développer votre confiance et votre style. Tourner, freiner, sauter, accélérer, etc.',
+                'feature-group': 'Danse en groupe',
+                'feature-group-desc': 'Maîtrisez l\'art de la danse synchronisée. Techniques de guidage, coordination et harmonie entre partenaires, en groupe ou en couple.',
+                
+                // Pricing Section
+                'pricing-title': 'Infos',
+                'pricing-subtitle': 'Cours de roller dance à Toulouse-Blagnac. Lieu : Salle des fêtes des Ramiers, 31700 Blagnac (proche de Toulouse)',
+                'plan-intermediate': 'Intermédiaire',
+                'plan-price': '230 €',
+                'plan-period': 'par an',
+                'plan-feature-1': 'Techniques avancées',
+                'plan-feature-2': 'Chorégraphies complètes',
+                'plan-feature-3': '19h - 20h30 les jeudis : roller dance',
+                'plan-feature-4': 'inclus : 19h - 20h30 les mercredis (cours de patinage)',
+                'plan-feature-5': 'Coaching personnalisé',
+                'plan-feature-6': 'Préparation physique',
+                'plan-feature-7': 'Roller disco régulièrement',
+                'plan-location': 'Lieu',
+                
+                // News Section
+                'news-title': 'Actualités du club',
+                'news-subtitle': 'Découvrez nos dernières actualités de roller dance à Toulouse et suivez-nous sur les réseaux sociaux',
+                'social-facebook': 'Facebook',
+                'social-facebook-desc': 'Suivez nos actualités et événements',
+                'social-facebook-follow': 'Nous suivre',
+                'social-instagram': 'Instagram',
+                'social-instagram-desc': 'Photos et vidéos de nos cours',
+                'social-instagram-follow': 'Nous suivre',
+                'social-tiktok': 'TikTok',
+                'social-tiktok-desc': 'Vidéos courtes et défis roller',
+                'social-tiktok-follow': 'Nous suivre',
+                
+                // Contact Section
+                'contact-title': 'Rejoignez Notre École de Roller Dance à Toulouse-Blagnac',
+                'contact-subtitle': 'Contactez-nous pour commencer votre aventure dans le roller dance et le patinage artistique à Toulouse',
+                'form-name': 'Nom & Prénom',
+                'form-name-placeholder': 'Votre nom complet',
+                'form-email': 'Adresse Email',
+                'form-email-placeholder': 'votre.email@exemple.com',
+                'form-message': 'Message',
+                'form-message-placeholder': 'Parlez-nous de votre expérience en roller dance et de vos objectifs...',
+                'form-submit': 'Envoyer le Message',
+                
+                // Footer
+                'footer-parent-site': 'site parent :',
+                'footer-support': 'Contact Support',
+                'footer-rights': 'Tous droits réservés.',
+                'footer-credit': 'Site créé avec passion pour la communauté roller dance à Toulouse et Blagnac',
+                'footer-location': '📍 École de roller dance à Toulouse - Salle des fêtes des Ramiers, 31700 Blagnac (proche de Toulouse)'
+            },
+            en: {
+                // Navigation
+                'nav-video': 'Video',
+                'nav-courses': 'Courses',
+                'nav-info': 'Information',
+                'nav-news': 'News',
+                'nav-contact': 'Contact',
+                'join': 'Join',
+                
+                // Hero Section
+                'hero-subtitle-1': 'Roller Dance section of the club <a href="https://bscroller.fr/">https://bscroller.fr/</a>',
+                'hero-subtitle-2': 'Discover roller dance in Toulouse and Blagnac. A discipline that combines style, grace, technique, sport and passion for several decades. Artistic skating courses in Toulouse.',
+                'hero-btn-discover': 'Discover Techniques',
+                'hero-btn-join': 'Join Us',
+                
+                // Features Section
+                'features-title': 'Roller Dance Courses in Toulouse',
+                'features-subtitle': 'The essential basics of roller dance and artistic skating in Toulouse: balance, style and technical mastery',
+                'feature-balance': 'Balance & Stability',
+                'feature-balance-desc': 'Master the art of balance on wheels. Basic techniques to develop your stability and confidence on skates.',
+                'feature-choreography': 'Choreography',
+                'feature-choreography-desc': 'Create fun, fluid and graceful sequences. Learn to synchronize your movements with music for stunning performances.',
+                'feature-spins': 'Spins & Turns',
+                'feature-spins-desc': 'Advanced rotation and pivot techniques. Develop your ability to execute complex figures with precision.',
+                'feature-artistic': 'Artistic Expression',
+                'feature-artistic-desc': 'Release your creativity and develop your personal style. The art of roller dance goes far beyond pure technique.',
+                'feature-technique': 'Technique',
+                'feature-technique-desc': 'Fundamental skating techniques to develop your confidence and style. Turn, brake, jump, accelerate, etc.',
+                'feature-group': 'Group Dance',
+                'feature-group-desc': 'Master the art of synchronized dance. Leading techniques, coordination and harmony between partners, in groups or couples.',
+                
+                // Pricing Section
+                'pricing-title': 'Information - Roller Dance Toulouse',
+                'pricing-subtitle': 'Roller dance courses in Toulouse and Blagnac. Location: Salle des fêtes des Ramiers, 31700 Blagnac (near Toulouse)',
+                'plan-intermediate': 'Intermediate',
+                'plan-price': '230 €',
+                'plan-period': 'per year',
+                'plan-feature-1': 'Advanced techniques',
+                'plan-feature-2': 'Complete choreographies',
+                'plan-feature-3': '7pm - 8:30pm Thursdays: roller dance',
+                'plan-feature-4': 'included: 7pm - 8:30pm Wednesdays (skating lessons)',
+                'plan-feature-5': 'Personalized coaching',
+                'plan-feature-6': 'Physical preparation',
+                'plan-feature-7': 'Regular roller disco',
+                'plan-location': 'Location',
+                
+                // News Section
+                'news-title': 'Roller Dance Club News',
+                'news-subtitle': 'Discover our latest roller dance news in Toulouse-Blagnac and follow us on social networks',
+                'social-facebook': 'Facebook',
+                'social-facebook-desc': 'Follow our news and events',
+                'social-facebook-follow': 'Follow Us',
+                'social-instagram': 'Instagram',
+                'social-instagram-desc': 'Photos and videos of our courses',
+                'social-instagram-follow': 'Follow Us',
+                'social-tiktok': 'TikTok',
+                'social-tiktok-desc': 'Short videos and roller challenges',
+                'social-tiktok-follow': 'Follow Us',
+                
+                // Contact Section
+                'contact-title': 'Join Our Roller Dance School in Toulouse-Blagnac',
+                'contact-subtitle': 'Contact us to start your adventure in roller dance and artistic skating in Toulouse',
+                'form-name': 'Name & Surname',
+                'form-name-placeholder': 'Your full name',
+                'form-email': 'Email Address',
+                'form-email-placeholder': 'your.email@example.com',
+                'form-message': 'Message',
+                'form-message-placeholder': 'Tell us about your roller dance experience and your goals...',
+                'form-submit': 'Send Message',
+                
+                // Footer
+                'footer-parent-site': 'parent site:',
+                'footer-support': 'Contact Support',
+                'footer-rights': 'All rights reserved.',
+                'footer-credit': 'Site created with passion for the roller dance community in Toulouse and Blagnac',
+                'footer-location': '📍 Roller dance school in Toulouse - Salle des fêtes des Ramiers, 31700 Blagnac (near Toulouse)'
+            }
+        };
+
+        // Translation functions
+        function setLanguage(lang) {
+            // Update active language button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelectorAll(`[data-lang="${lang}"]`).forEach(btn => {
+                btn.classList.add('active');
+            });
+            
+            // Update all translatable elements
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[lang] && translations[lang][key]) {
+                    // Use innerHTML to preserve HTML tags like links
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+            
+            // Update placeholders
+            document.querySelectorAll('[data-translate-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-translate-placeholder');
+                if (translations[lang] && translations[lang][key]) {
+                    element.placeholder = translations[lang][key];
+                }
+            });
+            
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+            
+            // Store language preference
+            localStorage.setItem('preferred-language', lang);
+        }
+
+        // Initialize language system
+        function initializeLanguage() {
+            // Get saved language or default to French
+            const savedLang = localStorage.getItem('preferred-language') || 'fr';
+            setLanguage(savedLang);
+            
+            // Add click listeners to language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    setLanguage(lang);
+                });
+            });
+        }
+
+        // Initialize when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeLanguage);
+        } else {
+            initializeLanguage();
+        }

@@ -2455,3 +2455,97 @@ https://templatemo.com/tm-594-nexus-flow
         ::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(var(--primary-pink), var(--primary-cyan));
         }
+
+        /* Language Selector Styles */
+        .language-selector {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .nav-bottom {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .lang-btn {
+            background: rgba(0, 255, 255, 0.1);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            color: var(--text-primary);
+            padding: 0.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 40px;
+            height: 40px;
+        }
+
+        .lang-btn:hover {
+            background: rgba(0, 255, 255, 0.2);
+            border-color: var(--primary-cyan);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
+        }
+
+        .lang-btn.active {
+            background: var(--primary-cyan);
+            color: var(--darker-bg);
+            border-color: var(--primary-cyan);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .lang-btn.active:hover {
+            background: var(--primary-cyan);
+            color: var(--darker-bg);
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Language Selector */
+        .mobile-lang-selector {
+            margin-bottom: 1rem;
+            justify-content: center;
+        }
+
+        .mobile-lang-selector .lang-btn {
+            min-width: 35px;
+            height: 35px;
+            font-size: 1rem;
+        }
+
+        /* Responsive adjustments for language selector */
+        @media (max-width: 768px) {
+            .language-selector {
+                gap: 0.3rem;
+            }
+            
+            .lang-btn {
+                min-width: 35px;
+                height: 35px;
+                font-size: 1rem;
+                padding: 0.3rem;
+            }
+
+            .nav-bottom {
+                gap: 0.5rem;
+                margin-left: auto; /* Push language selector to the right */
+            }
+
+            /* Hide the "Rejoindre" button in header on mobile/tablet */
+            .cyber-button {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .lang-btn {
+                min-width: 30px;
+                height: 30px;
+                font-size: 0.9rem;
+                padding: 0.2rem;
+            }
+        }
