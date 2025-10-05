@@ -330,6 +330,14 @@ https://templatemo.com/tm-594-nexus-flow
                 const heroHeight = heroSection.offsetHeight;
                 const windowHeight = window.innerHeight;
                 
+                // Get initial transform based on screen size
+                let initialTransform = 'translateY(-20vh)'; // Desktop default
+                if (window.innerWidth <= 480) {
+                    initialTransform = 'translateY(-15vh)'; // Mobile
+                } else if (window.innerWidth <= 768) {
+                    initialTransform = 'translateY(-18vh)'; // Tablet
+                }
+                
                 // Hero content fade out effect when scrolling down - starts earlier
                 const fadeStart = heroHeight * 0.05; // Start fading at 5% of hero height
                 const fadeEnd = heroHeight * 0.3; // Complete fade at 30% of hero height
@@ -340,13 +348,14 @@ https://templatemo.com/tm-594-nexus-flow
                     const scale = 1 - (fadeProgress * 0.4); // Scale from 1 to 0.6
                     
                     heroContent.style.opacity = opacity;
-                    heroContent.style.transform = `scale(${scale})`;
+                    heroContent.style.transform = `${initialTransform} scale(${scale})`;
                 } else if (scrolled >= fadeEnd) {
                     heroContent.style.opacity = 0;
-                    heroContent.style.transform = 'scale(0.6)';
+                    heroContent.style.transform = `${initialTransform} scale(0.6)`;
                 } else {
+                    // Reset to initial state when scrolling back up
                     heroContent.style.opacity = 1;
-                    heroContent.style.transform = 'scale(1)';
+                    heroContent.style.transform = `${initialTransform} scale(1)`;
                 }
                 
                 // Video2 moves up to be fully visible - starts earlier to sync with text fade

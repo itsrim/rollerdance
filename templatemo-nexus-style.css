@@ -553,28 +553,61 @@ https://templatemo.com/tm-594-nexus-flow
             width: auto;
             max-width: 100%;
             object-fit: contain;
-            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
             transition: all 0.3s ease;
         }
 
         .logo-text {
+            font-family: 'Orbitron', 'Space Grotesk', monospace;
             font-size: 1.4rem;
             font-weight: 700;
             color: #ffffff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            text-shadow: 
+                0 0 2px #00ffff,
+                0 0 4px #00ffff,
+                0 0 6px #00ffff;
             letter-spacing: 0.5px;
             white-space: nowrap;
             transition: all 0.3s ease;
+            position: relative;
+            filter: drop-shadow(0 0 3px rgba(0, 255, 255, 0.3));
+        }
+
+        .logo-text::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, rgba(0, 255, 255, 0.03) 50%, transparent 100%);
+            border-radius: 4px;
+            z-index: -1;
+            filter: blur(2px);
+            animation: neonPulseHeader 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonPulseHeader {
+            0% {
+                opacity: 0.2;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0.4;
+                transform: scale(1.01);
+            }
         }
 
         .logo:hover .logo-img {
-            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.6));
             transform: scale(1.05);
         }
 
         .logo:hover .logo-text {
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+            text-shadow: 
+                0 0 3px #00ffff,
+                0 0 6px #00ffff,
+                0 0 9px #00ffff;
             transform: scale(1.02);
+            filter: drop-shadow(0 0 6px rgba(0, 255, 255, 0.6));
         }
 
         .mobile-menu-logo {
@@ -690,6 +723,26 @@ https://templatemo.com/tm-594-nexus-flow
             align-items: center;
             justify-content: center;
             padding: 0 2rem;
+            transform: translateY(-20vh);
+        }
+
+        .hero-logo {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-logo-img {
+            height: 280px;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+            transition: all 0.3s ease;
+        }
+
+        .hero-logo-img:hover {
+            /* Pas d'effet hover */
         }
 
         .hero-title {
@@ -1492,6 +1545,11 @@ https://templatemo.com/tm-594-nexus-flow
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
+                transform: translateY(-18vh);
+            }
+            
+            .hero-logo-img {
+                height: 200px;
             }
             
             .hero-title {
@@ -1684,6 +1742,11 @@ https://templatemo.com/tm-594-nexus-flow
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
+                transform: translateY(-15vh);
+            }
+            
+            .hero-logo-img {
+                height: 150px;
             }
             
             .hero-title {
