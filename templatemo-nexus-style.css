@@ -1320,6 +1320,367 @@ https://templatemo.com/tm-594-nexus-flow
             font-size: 0.8rem;
         }
 
+        /* News Section */
+        .news {
+            padding: 120px 2rem;
+            background: rgba(255, 0, 255, 0.02);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .news-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Carrousel Styles */
+        .carousel-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto 5rem;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 255, 255, 0.2);
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 100%;
+        }
+
+        .carousel-slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.8;
+        }
+
+        .carousel-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+            border: 1px solid var(--border-color);
+        }
+
+        .carousel-content h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-cyan);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .carousel-content p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 1rem;
+            z-index: 3;
+        }
+
+        .carousel-btn {
+            background: rgba(0, 255, 255, 0.2);
+            border: 2px solid var(--primary-cyan);
+            color: var(--primary-cyan);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-btn:hover {
+            background: var(--primary-cyan);
+            color: var(--darker-bg);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+            transform: scale(1.1);
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(0, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: var(--primary-cyan);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+            transform: scale(1.2);
+        }
+
+        /* Social Grid Styles */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .social-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            clip-path: polygon(20px 0%, 100% 0%, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0% 100%, 0% 20px);
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .social-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .social-card.facebook::before {
+            background: linear-gradient(135deg, #1877f2, #42a5f5);
+        }
+
+        .social-card.instagram::before {
+            background: linear-gradient(135deg, #e4405f, #f093fb, #f5576c);
+        }
+
+        .social-card.tiktok::before {
+            background: linear-gradient(135deg, #ff0050, #00f2ea);
+        }
+
+        .social-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 255, 255, 0.2);
+        }
+
+        .social-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .social-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-card.facebook .social-icon {
+            background: linear-gradient(135deg, #1877f2, #42a5f5);
+            color: white;
+        }
+
+        .social-card.instagram .social-icon {
+            background: linear-gradient(135deg, #e4405f, #f093fb, #f5576c);
+            color: white;
+        }
+
+        .social-card.tiktok .social-icon {
+            background: linear-gradient(135deg, #ff0050, #00f2ea);
+            color: white;
+        }
+
+        .social-icon svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        .social-card:hover .social-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+        }
+
+        .social-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-cyan);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .social-card p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .social-link {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
+            color: var(--darker-bg);
+            padding: 1rem 2rem;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            clip-path: polygon(15px 0%, 100% 0%, calc(100% - 15px) 100%, 0% 100%);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 255, 255, 0.4);
+        }
+
+        /* Social Posts Styles */
+        .social-post {
+            width: 100%;
+            margin: 1.5rem 0;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .post-loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .loading-spinner {
+            width: 30px;
+            height: 30px;
+            border: 3px solid rgba(0, 255, 255, 0.3);
+            border-top: 3px solid var(--primary-cyan);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .post-content {
+            background: rgba(0, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 0.5rem;
+            width: 100%;
+            max-height: 150px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-text {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .post-date {
+            color: var(--primary-cyan);
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+            opacity: 0.8;
+        }
+
+        .post-error {
+            color: var(--primary-orange);
+            font-size: 0.85rem;
+            text-align: center;
+            padding: 1rem;
+            background: rgba(249, 115, 22, 0.1);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            border-radius: 8px;
+        }
+
+        .post-image {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .post-image:hover {
+            transform: scale(1.05);
+        }
+
+        .post-date {
+            color: var(--primary-cyan);
+            font-size: 0.75rem;
+            margin-top: auto;
+            opacity: 0.8;
+            text-align: center;
+        }
+
         /* Contact Section */
         .contact {
             padding: 120px 2rem;
@@ -1660,6 +2021,90 @@ https://templatemo.com/tm-594-nexus-flow
                 transform: none;
             }
             
+            /* News section fixes */
+            .news {
+                padding: 80px 1rem;
+            }
+            
+            .carousel-container {
+                margin-bottom: 3rem;
+            }
+            
+            .carousel-wrapper {
+                height: 300px;
+            }
+            
+            .carousel-content {
+                padding: 1.5rem;
+                max-width: 90%;
+            }
+            
+            .carousel-content h3 {
+                font-size: 1.5rem;
+            }
+            
+            .carousel-content p {
+                font-size: 1rem;
+            }
+            
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .social-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .social-card {
+                padding: 2rem 1.5rem;
+                min-height: 250px;
+            }
+            
+            .social-icon {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 1.5rem;
+            }
+            
+            .social-icon svg {
+                width: 30px;
+                height: 30px;
+            }
+            
+            .social-card h3 {
+                font-size: 1.3rem;
+            }
+            
+            .social-link {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .social-post {
+                margin: 1rem 0;
+                min-height: 100px;
+            }
+            
+            .post-content {
+                padding: 0.5rem;
+                max-height: 120px;
+            }
+            
+            .post-image {
+                height: 80px;
+            }
+            
+            .post-text {
+                font-size: 0.8rem;
+            }
+            
+            .post-date {
+                font-size: 0.7rem;
+            }
+
             /* Contact section fixes */
             .contact {
                 padding: 80px 1rem;

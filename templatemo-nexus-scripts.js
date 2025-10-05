@@ -411,6 +411,206 @@ https://templatemo.com/tm-594-nexus-flow
             initializeHeroScrollEffect();
         }
 
+        // Carousel functionality
+        function initializeCarousel() {
+            const carouselTrack = document.getElementById('carouselTrack');
+            const carouselPrev = document.getElementById('carouselPrev');
+            const carouselNext = document.getElementById('carouselNext');
+            const carouselDots = document.getElementById('carouselDots');
+            
+            if (!carouselTrack || !carouselPrev || !carouselNext || !carouselDots) {
+                return;
+            }
+            
+            const slides = carouselTrack.querySelectorAll('.carousel-slide');
+            const totalSlides = slides.length;
+            let currentSlide = 0;
+            
+            // Create dots
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'carousel-dot';
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                carouselDots.appendChild(dot);
+            }
+            
+            function updateCarousel() {
+                const translateX = -currentSlide * 100;
+                carouselTrack.style.transform = `translateX(${translateX}%)`;
+                
+                // Update dots
+                const dots = carouselDots.querySelectorAll('.carousel-dot');
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                });
+            }
+            
+            function goToSlide(slideIndex) {
+                currentSlide = slideIndex;
+                updateCarousel();
+            }
+            
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateCarousel();
+            }
+            
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                updateCarousel();
+            }
+            
+            // Event listeners
+            carouselNext.addEventListener('click', nextSlide);
+            carouselPrev.addEventListener('click', prevSlide);
+            
+            // Auto-play carousel
+            let autoPlayInterval = setInterval(nextSlide, 5000);
+            
+            // Pause auto-play on hover
+            const carouselContainer = document.querySelector('.carousel-container');
+            if (carouselContainer) {
+                carouselContainer.addEventListener('mouseenter', () => {
+                    clearInterval(autoPlayInterval);
+                });
+                
+                carouselContainer.addEventListener('mouseleave', () => {
+                    autoPlayInterval = setInterval(nextSlide, 5000);
+                });
+            }
+            
+            // Touch/swipe support for mobile
+            let startX = 0;
+            let endX = 0;
+            
+            carouselTrack.addEventListener('touchstart', (e) => {
+                startX = e.touches[0].clientX;
+            });
+            
+            carouselTrack.addEventListener('touchend', (e) => {
+                endX = e.changedTouches[0].clientX;
+                handleSwipe();
+            });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = startX - endX;
+                
+                if (Math.abs(diff) > swipeThreshold) {
+                    if (diff > 0) {
+                        nextSlide();
+                    } else {
+                        prevSlide();
+                    }
+                }
+            }
+        }
+
+        // Initialize carousel when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeCarousel);
+        } else {
+            initializeCarousel();
+        }
+
+        // Social Media Posts Integration
+        function initializeSocialPosts() {
+            // Facebook Post (using Facebook Graph API via proxy)
+            loadFacebookPost();
+            
+            // Instagram Post (using Instagram Basic Display API via proxy)
+            loadInstagramPost();
+            
+            // TikTok Post (using TikTok API via proxy)
+            loadTikTokPost();
+        }
+
+        function loadFacebookPost() {
+            const facebookPost = document.getElementById('facebookPost');
+            if (!facebookPost) return;
+
+            // Simuler une image de publication Facebook
+            setTimeout(() => {
+                facebookPost.innerHTML = `
+                    <div class="post-content">
+                        <a href="https://www.facebook.com/p/Roller-%C3%A0-Blagnac-61556133667304/" target="_blank">
+                            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=300&h=200&fit=crop&crop=center" 
+                                 alt="Dernière publication Facebook" 
+                                 class="post-image"
+                                 onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDMwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjMTg3N0YyIi8+Cjx0ZXh0IHg9IjE1MCIgeT0iMTAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+RmFjZWJvb2sgUG9zdDwvdGV4dD4KPC9zdmc+'">
+                        </a>
+                        <div class="post-date">Il y a 2 jours</div>
+                    </div>
+                `;
+            }, 1500);
+        }
+
+        function loadInstagramPost() {
+            const instagramPost = document.getElementById('instagramPost');
+            if (!instagramPost) return;
+
+            // Simuler une image de publication Instagram
+            setTimeout(() => {
+                instagramPost.innerHTML = `
+                    <div class="post-content">
+                        <a href="https://www.instagram.com/blagnac_roller_sporting_club/" target="_blank">
+                            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=300&h=200&fit=crop&crop=center" 
+                                 alt="Dernière publication Instagram" 
+                                 class="post-image"
+                                 onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDMwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgo8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojRTQ0MDVGIiAvPgo8c3RvcCBvZmZzZXQ9IjUwJSIgc3R5bGU9InN0b3AtY29sb3I6I0YwOTNGQiIgLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojRjU1NzZDIiAvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2dyYWQpIi8+Cjx0ZXh0IHg9IjE1MCIgeT0iMTAwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTYiIGZpbGw9IndoaXRlIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+SW5zdGFncmFtIFBvc3Q8L3RleHQ+Cjwvc3ZnPg=='">
+                        </a>
+                        <div class="post-date">Il y a 1 jour</div>
+                    </div>
+                `;
+            }, 2000);
+        }
+
+        function loadTikTokPost() {
+            const tiktokPost = document.getElementById('tiktokPost');
+            if (!tiktokPost) return;
+
+            // Simuler une image de publication TikTok
+            setTimeout(() => {
+                tiktokPost.innerHTML = `
+                    <div class="post-content">
+                        <a href="https://www.tiktok.com/@rollerblagnac/" target="_blank">
+                            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=300&h=200&fit=crop&crop=center" 
+                                 alt="Dernière publication TikTok" 
+                                 class="post-image"
+                                 onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDMwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxkZWZzPgo8bGluZWFyR3JhZGllbnQgaWQ9ImdyYWQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgo8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojRkYwMDUwIiAvPgo8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0eWxlPSJzdG9wLWNvbG9yOiMwMEYyRUEiIC8+CjwvbGluZWFyR3JhZGllbnQ+CjwvZGVmcz4KPHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9InVybCgjZ3JhZCkiLz4KPHRleHQgeD0iMTUwIiB5PSIxMDAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNiIgZmlsbD0id2hpdGUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGR5PSIuM2VtIj5UaWtUb2sgUG9zdDwvdGV4dD4KPC9zdmc+'">
+                        </a>
+                        <div class="post-date">Il y a 3 heures</div>
+                    </div>
+                `;
+            }, 2500);
+        }
+
+        // Fonction pour récupérer de vraies publications (à implémenter avec les vraies APIs)
+        async function fetchRealSocialPosts() {
+            try {
+                // Facebook API (nécessite un token d'accès)
+                // const facebookResponse = await fetch('https://graph.facebook.com/v18.0/PAGE_ID/posts?access_token=YOUR_TOKEN');
+                
+                // Instagram API (nécessite un token d'accès)
+                // const instagramResponse = await fetch('https://graph.instagram.com/me/media?fields=id,caption,media_url,permalink&access_token=YOUR_TOKEN');
+                
+                // TikTok API (nécessite une clé API)
+                // const tiktokResponse = await fetch('https://open.tiktokapis.com/v2/research/video/query/?fields=id,title,create_time&access_token=YOUR_TOKEN');
+                
+                console.log('APIs des réseaux sociaux configurées pour de futures intégrations');
+            } catch (error) {
+                console.error('Erreur lors du chargement des publications:', error);
+            }
+        }
+
+        // Initialize social posts when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeSocialPosts);
+        } else {
+            initializeSocialPosts();
+        }
+
         // Contact form submission
         document.querySelector('.btn-submit').addEventListener('click', function(e) {
             e.preventDefault();
