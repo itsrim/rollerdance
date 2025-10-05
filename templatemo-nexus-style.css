@@ -1659,18 +1659,57 @@ https://templatemo.com/tm-594-nexus-flow
             border-radius: 8px;
         }
 
-        .post-image {
+        .post-media-container {
+            position: relative;
             width: 100%;
             height: 100px;
-            object-fit: cover;
             border-radius: 8px;
+            overflow: hidden;
             margin-bottom: 0.5rem;
+        }
+
+        .post-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             transition: transform 0.3s ease;
             cursor: pointer;
         }
 
         .post-image:hover {
             transform: scale(1.05);
+        }
+
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 255, 255, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--darker-bg);
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            z-index: 2;
+        }
+
+        .play-button:hover {
+            background: var(--primary-cyan);
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
+        }
+
+        .post-media-container:hover .play-button {
+            background: var(--primary-cyan);
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.7);
         }
 
         .post-date {
@@ -2093,8 +2132,18 @@ https://templatemo.com/tm-594-nexus-flow
                 max-height: 120px;
             }
             
-            .post-image {
+            .post-media-container {
                 height: 80px;
+            }
+            
+            .post-image {
+                height: 100%;
+            }
+            
+            .play-button {
+                width: 30px;
+                height: 30px;
+                font-size: 12px;
             }
             
             .post-text {
