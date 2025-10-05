@@ -357,11 +357,11 @@ https://templatemo.com/tm-594-nexus-flow
                 
                 if (scrolled > video2Start && scrolled < video2End) {
                     const video2Progress = (scrolled - video2Start) / (video2End - video2Start);
-                    const moveUp = video2Progress * 100; // Move up by 100px
+                    const moveUp = video2Progress * 120; // Move up by 120px (reduced space compensation)
                     
                     video2Frame.style.transform = `translateX(-50%) translateY(-${moveUp}px)`;
                 } else if (scrolled >= video2End) {
-                    video2Frame.style.transform = 'translateX(-50%) translateY(-100px)';
+                    video2Frame.style.transform = 'translateX(-50%) translateY(-120px)'; // Compensate reduced space
                 } else {
                     video2Frame.style.transform = 'translateX(-50%) translateY(0)';
                 }
