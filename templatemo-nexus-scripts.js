@@ -753,3 +753,41 @@ https://templatemo.com/tm-594-nexus-flow
         } else {
             initializeLanguage();
         }
+
+        // Scroll animation for feature cards
+        function initializeScrollAnimations() {
+            const featureCards = document.querySelectorAll('.feature-card');
+
+            function updateScrollAnimations() {
+                featureCards.forEach((card, index) => {
+                    const rect = card.getBoundingClientRect();
+                    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                    
+                    if (isVisible) {
+                        // Carte visible - l'animer pour qu'elle arrive de l'extérieur
+                        card.classList.add('animate-in');
+                        card.classList.remove('animate-out');
+                    }
+                });
+            }
+
+            // Écouter les événements de scroll
+            window.addEventListener('scroll', updateScrollAnimations);
+            
+            // Animation initiale au chargement
+            setTimeout(() => {
+                featureCards.forEach(card => {
+                    const rect = card.getBoundingClientRect();
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        card.classList.add('animate-in');
+                    }
+                });
+            }, 500);
+        }
+
+        // Initialize scroll animations when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeScrollAnimations);
+        } else {
+            initializeScrollAnimations();
+        }

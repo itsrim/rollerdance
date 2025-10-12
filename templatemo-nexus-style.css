@@ -1062,8 +1062,10 @@ https://templatemo.com/tm-594-nexus-flow
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .feature-card {
@@ -1123,6 +1125,39 @@ https://templatemo.com/tm-594-nexus-flow
         .feature-card p {
             color: var(--text-secondary);
             line-height: 1.8;
+        }
+
+        /* Scroll animations for feature cards */
+        .scroll-animate-left {
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-animate-right {
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-animate-left.animate-in {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scroll-animate-right.animate-in {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .scroll-animate-left.animate-out {
+            opacity: 0;
+            transform: translateX(-100px);
+        }
+
+        .scroll-animate-right.animate-out {
+            opacity: 0;
+            transform: translateX(100px);
         }
 
         /* Stats Section */
@@ -2290,6 +2325,16 @@ https://templatemo.com/tm-594-nexus-flow
             
             .video-content .feature-card {
                 padding: 1.5rem;
+            }
+            
+            /* Features grid responsive */
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .feature-card {
+                padding: 2rem;
             }
             
             .pricing-card {
