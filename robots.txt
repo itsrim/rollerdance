@@ -1,0 +1,43 @@
+# Robots.txt pour rollerdancestyle.free.fr
+# Empêche l'indexation des images, vidéos et du dossier images
+
+User-agent: *
+# Bloquer l'accès au dossier images complet
+Disallow: /images/
+
+# Bloquer tous les fichiers images (toutes extensions courantes)
+Disallow: /*.jpg$
+Disallow: /*.JPG$
+Disallow: /*.jpeg$
+Disallow: /*.JPEG$
+Disallow: /*.png$
+Disallow: /*.PNG$
+Disallow: /*.gif$
+Disallow: /*.GIF$
+Disallow: /*.webp$
+Disallow: /*.WEBP$
+Disallow: /*.svg$
+Disallow: /*.SVG$
+Disallow: /*.ico$
+Disallow: /*.ICO$
+
+# Bloquer tous les fichiers vidéo
+Disallow: /*.mp4$
+Disallow: /*.MP4$
+Disallow: /*.avi$
+Disallow: /*.AVI$
+Disallow: /*.mov$
+Disallow: /*.MOV$
+Disallow: /*.wmv$
+Disallow: /*.WMV$
+Disallow: /*.flv$
+Disallow: /*.FLV$
+Disallow: /*.webm$
+Disallow: /*.WEBM$
+
+# Autoriser l'indexation du reste du site
+Allow: /
+
+# Sitemap
+Sitemap: http://rollerdancestyle.free.fr/sitemap.xml
+
