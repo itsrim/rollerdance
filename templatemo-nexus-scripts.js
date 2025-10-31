@@ -221,23 +221,32 @@ https://templatemo.com/tm-594-nexus-flow
             }
         });
 
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
+        // Scroll animations for fade-up sections
+        function initializeFadeUpAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-up').forEach(el => {
+                observer.observe(el);
             });
-        }, observerOptions);
+        }
 
-        document.querySelectorAll('.fade-up').forEach(el => {
-            observer.observe(el);
-        });
+        // Initialize fade-up animations when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeFadeUpAnimations);
+        } else {
+            initializeFadeUpAnimations();
+        }
 
         // Button effects
         document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
@@ -455,8 +464,12 @@ https://templatemo.com/tm-594-nexus-flow
             }
             
             // Event listeners
-            carouselNext.addEventListener('click', nextSlide);
-            carouselPrev.addEventListener('click', prevSlide);
+            if (carouselNext) {
+                carouselNext.addEventListener('click', nextSlide);
+            }
+            if (carouselPrev) {
+                carouselPrev.addEventListener('click', prevSlide);
+            }
             
             // Auto-play carousel
             let autoPlayInterval = setInterval(nextSlide, 5000);
@@ -509,36 +522,46 @@ https://templatemo.com/tm-594-nexus-flow
 
 
 
-        // Contact form submission
-        document.querySelector('.btn-submit').addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            if (name && email && message) {
-                // Simulate form submission
-                this.textContent = 'TRANSMITTING...';
-                this.style.background = 'linear-gradient(135deg, var(--primary-cyan), var(--primary-pink))';
+        // Contact form submission (only if form exists)
+        const submitButton = document.querySelector('.btn-submit');
+        if (submitButton) {
+            submitButton.addEventListener('click', function(e) {
+                e.preventDefault();
                 
-                setTimeout(() => {
-                    this.textContent = 'TRANSMISSION COMPLETE';
-                    this.style.background = 'var(--primary-cyan)';
+                const nameInput = document.getElementById('name');
+                const emailInput = document.getElementById('email');
+                const messageInput = document.getElementById('message');
+                
+                if (!nameInput || !emailInput || !messageInput) return;
+                
+                const name = nameInput.value;
+                const email = emailInput.value;
+                const message = messageInput.value;
+                
+                if (name && email && message) {
+                    // Simulate form submission
+                    this.textContent = 'TRANSMITTING...';
+                    this.style.background = 'linear-gradient(135deg, var(--primary-cyan), var(--primary-pink))';
                     
-                    // Clear form
-                    document.getElementById('name').value = '';
-                    document.getElementById('email').value = '';
-                    document.getElementById('message').value = '';
-                    
-                    // Reset button after 3 seconds
                     setTimeout(() => {
-                        this.textContent = 'Transmit Message';
-                        this.style.background = '';
-                    }, 3000);
-                }, 2000);
-            }
-        });
+                        this.textContent = 'TRANSMISSION COMPLETE';
+                        this.style.background = 'var(--primary-cyan)';
+                        
+                        // Clear form
+                        nameInput.value = '';
+                        emailInput.value = '';
+                        messageInput.value = '';
+                        
+                        // Reset button after 3 seconds
+                        setTimeout(() => {
+                            const translatedText = translations[document.documentElement.lang || 'fr']?.['form-submit'] || 'Envoyer le Message';
+                            this.textContent = translatedText;
+                            this.style.background = '';
+                        }, 3000);
+                    }, 2000);
+                }
+            });
+        }
 
         // Translation System
         const translations = {
@@ -553,29 +576,33 @@ https://templatemo.com/tm-594-nexus-flow
                 
                 // Hero Section
                 'hero-subtitle-1': 'Section Roller Dance du club <a href="https://bscroller.fr/">https://bscroller.fr/</a>',
-                'hero-subtitle-2': 'Découvrez le roller dance à Toulouse. Une discipline qui allie style, grâce, technique, sport et passion depuis plusieurs décennies.',
+                'hero-subtitle-2': 'Découvrez le roller dance à Toulouse et Blagnac. Une discipline qui allie style, grâce, technique, sport et passion depuis plusieurs décennies. Cours de patinage artistique à Toulouse.',
                 'hero-btn-discover': 'Découvrir les Techniques',
                 'hero-btn-join': 'Nous Rejoindre',
                 
                 // Features Section
-                'features-title': 'Cours de Roller Dance',
+                'features-title': 'Cours de Roller Dance à Toulouse',
                 'features-subtitle': 'Les bases essentielles du roller dance et du patinage artistique à Toulouse : équilibre, style et maîtrise technique',
                 'feature-balance': 'Équilibre & Stabilité',
                 'feature-balance-desc': 'Maîtrisez l\'art de l\'équilibre sur roulettes. Techniques de base pour développer votre stabilité et votre confiance sur les patins.',
+                'feature-balance-technique': 'Équilibre, Stabilité & Technique',
+                'feature-balance-technique-desc': 'Maîtrisez l\'art de l\'équilibre sur roulettes et les techniques de patinage fondamentales. Développez votre stabilité, votre confiance et votre style. Tourner, freiner, sauter, accélérer - toutes les bases essentielles.',
                 'feature-choreography': 'Chorégraphie',
                 'feature-choreography-desc': 'Créez des enchaînements funs, fluides et gracieux. Apprenez à synchroniser vos mouvements avec la musique pour des performances époustouflantes.',
                 'feature-spins': 'Pirouettes & Tours',
                 'feature-spins-desc': 'Techniques avancées de rotation et de pivot. Développez votre capacité à exécuter des figures complexes avec précision.',
                 'feature-artistic': 'Expression Artistique',
                 'feature-artistic-desc': 'Libérez votre créativité et développez votre style personnel. L\'art du roller dance va bien au-delà de la technique pure.',
+                'feature-artistic-group': 'Expression Artistique & Danse en groupe',
+                'feature-artistic-group-desc': 'Libérez votre créativité et développez votre style personnel. Maîtrisez l\'art de la danse synchronisée avec des techniques de guidage, coordination et harmonie entre partenaires, en groupe ou en couple.',
                 'feature-technique': 'Technique',
                 'feature-technique-desc': 'Des techniques de patinage fondamentales pour développer votre confiance et votre style. Tourner, freiner, sauter, accélérer, etc.',
                 'feature-group': 'Danse en groupe',
                 'feature-group-desc': 'Maîtrisez l\'art de la danse synchronisée. Techniques de guidage, coordination et harmonie entre partenaires, en groupe ou en couple.',
                 
                 // Pricing Section
-                'pricing-title': 'Infos',
-                'pricing-subtitle': 'Cours de roller dance à Toulouse-Blagnac. Lieu : Salle des fêtes des Ramiers, 31700 Blagnac (proche de Toulouse)',
+                'pricing-title': 'Informations - Roller Dance Toulouse',
+                'pricing-subtitle': 'Cours de roller dance à Toulouse et Blagnac. Lieu : Salle des fêtes des Ramiers, 31700 Blagnac (proche de Toulouse)',
                 'plan-intermediate': 'Intermédiaire',
                 'plan-price': '230 €',
                 'plan-period': 'par an',
@@ -584,25 +611,27 @@ https://templatemo.com/tm-594-nexus-flow
                 'plan-feature-3': '19h - 20h30 les jeudis : roller dance',
                 'plan-feature-4': 'inclus : 19h - 20h30 les mercredis (cours de patinage)',
                 'plan-feature-5': 'Coaching personnalisé',
-                'plan-feature-6': 'Préparation physique',
+                'plan-feature-6': 'Étirement physique',
                 'plan-feature-7': 'Roller disco régulièrement',
                 'plan-location': 'Lieu',
                 
                 // News Section
-                'news-title': 'Actualités du club',
+                'news-title': 'Actualités Roller Dance Toulouse',
                 'news-subtitle': 'Découvrez nos dernières actualités de roller dance à Toulouse et suivez-nous sur les réseaux sociaux',
                 'social-facebook': 'Facebook',
                 'social-facebook-desc': 'Suivez nos actualités et événements',
                 'social-facebook-follow': 'Nous suivre',
                 'social-instagram': 'Instagram',
                 'social-instagram-desc': 'Photos et vidéos de nos cours',
+                'social-instagram-desc-contact': 'Prof Rim',
                 'social-instagram-follow': 'Nous suivre',
+                'social-instagram-follow-contact': 'Contact Prof',
                 'social-tiktok': 'TikTok',
                 'social-tiktok-desc': 'Vidéos courtes et défis roller',
                 'social-tiktok-follow': 'Nous suivre',
                 
                 // Contact Section
-                'contact-title': 'Rejoignez Notre École de Roller Dance à Toulouse-Blagnac',
+                'contact-title': 'Rejoignez Notre École de Roller Dance à Toulouse',
                 'contact-subtitle': 'Contactez-nous pour commencer votre aventure dans le roller dance et le patinage artistique à Toulouse',
                 'form-name': 'Nom & Prénom',
                 'form-name-placeholder': 'Votre nom complet',
@@ -617,7 +646,16 @@ https://templatemo.com/tm-594-nexus-flow
                 'footer-support': 'Contact Support',
                 'footer-rights': 'Tous droits réservés.',
                 'footer-credit': 'Site créé avec passion pour la communauté roller dance à Toulouse et Blagnac',
-                'footer-location': '📍 École de roller dance à Toulouse - Salle des fêtes des Ramiers, 31700 Blagnac (proche de Toulouse)'
+                'footer-location': '📍 BSC roller skating / section Roller dance de Toulouse - Salle des fêtes des Ramiers, 31700 Blagnac',
+                
+                // Meta tags
+                'meta-title': 'Roller Dance Toulouse | Cours de Patinage Artistique à Blagnac | Roller Dance Style',
+                'meta-description': 'Cours de roller dance à Toulouse et Blagnac. Apprenez le patinage artistique, les techniques de roller dance et rejoignez notre école de roller à Toulouse. Salle des fêtes des Ramiers, 31700 Blagnac.',
+                'meta-keywords': 'roller dance Toulouse, patinage Toulouse, roller Toulouse, cours roller dance, patinage artistique Toulouse, roller Blagnac, école roller, roller dance cours, patinage cours Toulouse',
+                'og-title': 'Roller Dance Toulouse | Cours de Patinage Artistique à Blagnac',
+                'og-description': 'Cours de roller dance à Toulouse et Blagnac. Apprenez le patinage artistique et rejoignez notre école de roller à Toulouse.',
+                'twitter-title': 'Roller Dance Toulouse | Cours de Patinage Artistique à Blagnac',
+                'twitter-description': 'Cours de roller dance à Toulouse et Blagnac. Apprenez le patinage artistique et rejoignez notre école de roller à Toulouse.'
             },
             en: {
                 // Navigation
@@ -639,12 +677,16 @@ https://templatemo.com/tm-594-nexus-flow
                 'features-subtitle': 'The essential basics of roller dance and artistic skating in Toulouse: balance, style and technical mastery',
                 'feature-balance': 'Balance & Stability',
                 'feature-balance-desc': 'Master the art of balance on wheels. Basic techniques to develop your stability and confidence on skates.',
+                'feature-balance-technique': 'Balance, Stability & Technique',
+                'feature-balance-technique-desc': 'Master the art of balance on wheels and fundamental skating techniques. Develop your stability, confidence and style. Turn, brake, jump, accelerate - all the essential basics.',
                 'feature-choreography': 'Choreography',
                 'feature-choreography-desc': 'Create fun, fluid and graceful sequences. Learn to synchronize your movements with music for stunning performances.',
                 'feature-spins': 'Spins & Turns',
                 'feature-spins-desc': 'Advanced rotation and pivot techniques. Develop your ability to execute complex figures with precision.',
                 'feature-artistic': 'Artistic Expression',
                 'feature-artistic-desc': 'Release your creativity and develop your personal style. The art of roller dance goes far beyond pure technique.',
+                'feature-artistic-group': 'Artistic Expression & Group Dance',
+                'feature-artistic-group-desc': 'Release your creativity and develop your personal style. Master the art of synchronized dance with leading techniques, coordination and harmony between partners, in groups or couples.',
                 'feature-technique': 'Technique',
                 'feature-technique-desc': 'Fundamental skating techniques to develop your confidence and style. Turn, brake, jump, accelerate, etc.',
                 'feature-group': 'Group Dance',
@@ -661,7 +703,7 @@ https://templatemo.com/tm-594-nexus-flow
                 'plan-feature-3': '7pm - 8:30pm Thursdays: roller dance',
                 'plan-feature-4': 'included: 7pm - 8:30pm Wednesdays (skating lessons)',
                 'plan-feature-5': 'Personalized coaching',
-                'plan-feature-6': 'Physical preparation',
+                'plan-feature-6': 'Physical stretching',
                 'plan-feature-7': 'Regular roller disco',
                 'plan-location': 'Location',
                 
@@ -673,13 +715,15 @@ https://templatemo.com/tm-594-nexus-flow
                 'social-facebook-follow': 'Follow Us',
                 'social-instagram': 'Instagram',
                 'social-instagram-desc': 'Photos and videos of our courses',
+                'social-instagram-desc-contact': 'Prof Rim',
                 'social-instagram-follow': 'Follow Us',
+                'social-instagram-follow-contact': 'Contact Prof',
                 'social-tiktok': 'TikTok',
                 'social-tiktok-desc': 'Short videos and roller challenges',
                 'social-tiktok-follow': 'Follow Us',
                 
                 // Contact Section
-                'contact-title': 'Join Our Roller Dance School in Toulouse-Blagnac',
+                'contact-title': 'Join Our Roller Dance School in Toulouse',
                 'contact-subtitle': 'Contact us to start your adventure in roller dance and artistic skating in Toulouse',
                 'form-name': 'Name & Surname',
                 'form-name-placeholder': 'Your full name',
@@ -694,7 +738,16 @@ https://templatemo.com/tm-594-nexus-flow
                 'footer-support': 'Contact Support',
                 'footer-rights': 'All rights reserved.',
                 'footer-credit': 'Site created with passion for the roller dance community in Toulouse and Blagnac',
-                'footer-location': '📍 Roller dance school in Toulouse - Salle des fêtes des Ramiers, 31700 Blagnac (near Toulouse)'
+                'footer-location': '📍 BSC roller skating / Roller dance section of Toulouse - Salle des fêtes des Ramiers, 31700 Blagnac',
+                
+                // Meta tags
+                'meta-title': 'Roller Dance Toulouse | Artistic Skating Courses in Blagnac | Roller Dance Style',
+                'meta-description': 'Roller dance courses in Toulouse and Blagnac. Learn artistic skating, roller dance techniques and join our roller school in Toulouse. Salle des fêtes des Ramiers, 31700 Blagnac.',
+                'meta-keywords': 'roller dance Toulouse, skating Toulouse, roller Toulouse, roller dance courses, artistic skating Toulouse, roller Blagnac, roller school, roller dance lessons, skating courses Toulouse',
+                'og-title': 'Roller Dance Toulouse | Artistic Skating Courses in Blagnac',
+                'og-description': 'Roller dance courses in Toulouse and Blagnac. Learn artistic skating and join our roller school in Toulouse.',
+                'twitter-title': 'Roller Dance Toulouse | Artistic Skating Courses in Blagnac',
+                'twitter-description': 'Roller dance courses in Toulouse and Blagnac. Learn artistic skating and join our roller school in Toulouse.'
             }
         };
 
@@ -728,23 +781,90 @@ https://templatemo.com/tm-594-nexus-flow
             // Update HTML lang attribute
             document.documentElement.lang = lang;
             
+            // Update meta tags
+            if (translations[lang]) {
+                const meta = translations[lang];
+                if (meta['meta-title']) {
+                    document.title = meta['meta-title'];
+                }
+                const metaDescription = document.querySelector('meta[name="description"]');
+                if (metaDescription && meta['meta-description']) {
+                    metaDescription.setAttribute('content', meta['meta-description']);
+                }
+                const metaKeywords = document.querySelector('meta[name="keywords"]');
+                if (metaKeywords && meta['meta-keywords']) {
+                    metaKeywords.setAttribute('content', meta['meta-keywords']);
+                }
+                const ogTitle = document.querySelector('meta[property="og:title"]');
+                if (ogTitle && meta['og-title']) {
+                    ogTitle.setAttribute('content', meta['og-title']);
+                }
+                const ogDescription = document.querySelector('meta[property="og:description"]');
+                if (ogDescription && meta['og-description']) {
+                    ogDescription.setAttribute('content', meta['og-description']);
+                }
+                const twitterTitle = document.querySelector('meta[property="twitter:title"]');
+                if (twitterTitle && meta['twitter-title']) {
+                    twitterTitle.setAttribute('content', meta['twitter-title']);
+                }
+                const twitterDescription = document.querySelector('meta[property="twitter:description"]');
+                if (twitterDescription && meta['twitter-description']) {
+                    twitterDescription.setAttribute('content', meta['twitter-description']);
+                }
+            }
+            
             // Store language preference
             localStorage.setItem('preferred-language', lang);
         }
 
+        // Language system initialization flag
+        let languageSystemInitialized = false;
+        
         // Initialize language system
         function initializeLanguage() {
             // Get saved language or default to French
             const savedLang = localStorage.getItem('preferred-language') || 'fr';
             setLanguage(savedLang);
             
-            // Add click listeners to language buttons
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const lang = this.getAttribute('data-lang');
-                    setLanguage(lang);
+            // Use event delegation for language buttons (only once)
+            if (!languageSystemInitialized) {
+                document.addEventListener('click', function(e) {
+                    const langBtn = e.target.closest('.lang-btn');
+                    if (langBtn) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const lang = langBtn.getAttribute('data-lang');
+                        if (lang) {
+                            setLanguage(lang);
+                        }
+                    }
                 });
-            });
+                languageSystemInitialized = true;
+            }
+            
+            // Also attach direct listeners as backup
+            function attachDirectListeners() {
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    // Check if listener already exists
+                    if (!btn.dataset.listenerAttached) {
+                        btn.addEventListener('click', function(e) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const lang = this.getAttribute('data-lang');
+                            if (lang) {
+                                setLanguage(lang);
+                            }
+                        });
+                        btn.dataset.listenerAttached = 'true';
+                    }
+                });
+            }
+            
+            // Attach direct listeners
+            attachDirectListeners();
+            
+            // Retry after a small delay to catch any dynamically loaded buttons
+            setTimeout(attachDirectListeners, 300);
         }
 
         // Initialize when DOM is ready
@@ -757,32 +877,43 @@ https://templatemo.com/tm-594-nexus-flow
         // Scroll animation for feature cards
         function initializeScrollAnimations() {
             const featureCards = document.querySelectorAll('.feature-card');
+            
+            if (featureCards.length === 0) return;
 
-            function updateScrollAnimations() {
-                featureCards.forEach((card, index) => {
-                    const rect = card.getBoundingClientRect();
-                    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-                    
-                    if (isVisible) {
+            const cardObserverOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const cardObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
                         // Carte visible - l'animer pour qu'elle arrive de l'extérieur
+                        entry.target.classList.add('animate-in');
+                        entry.target.classList.remove('animate-out');
+                        // Une fois animée, ne plus observer cette carte
+                        cardObserver.unobserve(entry.target);
+                    }
+                });
+            }, cardObserverOptions);
+
+            // Observer toutes les cartes
+            featureCards.forEach(card => {
+                // Vérifier d'abord si la carte est déjà visible au chargement
+                const rect = card.getBoundingClientRect();
+                const isAlreadyVisible = rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
+                
+                if (isAlreadyVisible) {
+                    // Si la carte est déjà visible, l'animer immédiatement
+                    setTimeout(() => {
                         card.classList.add('animate-in');
                         card.classList.remove('animate-out');
-                    }
-                });
-            }
-
-            // Écouter les événements de scroll
-            window.addEventListener('scroll', updateScrollAnimations);
-            
-            // Animation initiale au chargement
-            setTimeout(() => {
-                featureCards.forEach(card => {
-                    const rect = card.getBoundingClientRect();
-                    if (rect.top < window.innerHeight && rect.bottom > 0) {
-                        card.classList.add('animate-in');
-                    }
-                });
-            }, 500);
+                    }, 100);
+                } else {
+                    // Sinon, l'observer pour l'animer quand elle devient visible
+                    cardObserver.observe(card);
+                }
+            });
         }
 
         // Initialize scroll animations when DOM is ready

@@ -1746,6 +1746,23 @@ https://templatemo.com/tm-594-nexus-flow
             margin-top: 4rem;
         }
 
+        .contact-logo {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .contact-logo-img {
+            max-width: 200px;
+            height: auto;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .contact-logo-img:hover {
+            transform: scale(1.05);
+        }
+
         .contact-form {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -2168,6 +2185,10 @@ https://templatemo.com/tm-594-nexus-flow
                 padding: 80px 1rem;
             }
             
+            .contact-logo-img {
+                max-width: 150px;
+            }
+
             .contact-form {
                 padding: 2rem;
             }
@@ -2346,6 +2367,14 @@ https://templatemo.com/tm-594-nexus-flow
                 min-height: 250px;
             }
             
+            .contact-logo-img {
+                max-width: 120px;
+            }
+
+            .contact-logo {
+                margin-bottom: 2rem;
+            }
+
             .contact-form {
                 padding: 1.5rem;
             }
