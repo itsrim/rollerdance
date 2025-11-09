@@ -333,11 +333,11 @@ https://templatemo.com/tm-594-nexus-flow
                 const windowHeight = window.innerHeight;
                 
                 // Get initial transform based on screen size
-                let initialTransform = 'translateY(-20vh)'; // Desktop default
+                let initialTransform = 'translateY(0)'; // Desktop default
                 if (window.innerWidth <= 480) {
-                    initialTransform = 'translateY(-15vh)'; // Mobile
+                    initialTransform = 'translateY(0)'; // Mobile
                 } else if (window.innerWidth <= 768) {
-                    initialTransform = 'translateY(-18vh)'; // Tablet
+                    initialTransform = 'translateY(0)'; // Tablet
                 }
                 
                 // Hero content fade out effect when scrolling down - starts earlier
@@ -630,6 +630,12 @@ https://templatemo.com/tm-594-nexus-flow
                 'social-tiktok-desc': 'Vidéos courtes et défis roller',
                 'social-tiktok-follow': 'Nous suivre',
                 
+                // Instagram Post Section
+                'instagram-post-title': 'Dernière Publication Instagram',
+                'instagram-post-subtitle': 'Découvrez la dernière publication du compte @blagnac_roller_sporting_club',
+                'instagram-loading': 'Chargement de la dernière publication...',
+                'instagram-view-all': 'Voir le profil Instagram',
+                
                 // Contact Section
                 'contact-title': 'Rejoignez Notre École de Roller Dance à Toulouse',
                 'contact-subtitle': 'Contactez-nous pour commencer votre aventure dans le roller dance et le patinage artistique à Toulouse',
@@ -721,6 +727,12 @@ https://templatemo.com/tm-594-nexus-flow
                 'social-tiktok': 'TikTok',
                 'social-tiktok-desc': 'Short videos and roller challenges',
                 'social-tiktok-follow': 'Follow Us',
+                
+                // Instagram Post Section
+                'instagram-post-title': 'Latest Instagram Post',
+                'instagram-post-subtitle': 'Discover the latest post from @blagnac_roller_sporting_club',
+                'instagram-loading': 'Loading latest post...',
+                'instagram-view-all': 'View Instagram Profile',
                 
                 // Contact Section
                 'contact-title': 'Join Our Roller Dance School in Toulouse',
@@ -922,3 +934,191 @@ https://templatemo.com/tm-594-nexus-flow
         } else {
             initializeScrollAnimations();
         }
+
+        // TikTok Last Post Loader - Récupère la dernière vidéo du compte TikTok
+        async function initializeTikTokWidget() {
+            const embedContainer = document.getElementById('tiktokEmbedContainer');
+            if (!embedContainer) return;
+
+            const username = 'rollerblagnac';
+            const tiktokProfileUrl = `https://www.tiktok.com/@${username}/`;
+            
+            // Fonction pour afficher la vidéo
+            function displayPost(videoUrl, postUrl, coverUrl = '') {
+                embedContainer.innerHTML = `
+                    <a href="${postUrl}" target="_blank" class="tiktok-post-link" style="display: block; text-decoration: none;">
+                        <div class="tiktok-post-video-container">
+                            ${coverUrl ? `<img src="${coverUrl}" alt="Dernière publication TikTok - @${username}" class="tiktok-post-cover" loading="lazy">` : ''}
+                            <video class="tiktok-post-video" ${coverUrl ? `poster="${coverUrl}"` : ''} muted loop playsinline>
+                                <source src="${videoUrl}" type="video/mp4">
+                            </video>
+                            <div class="tiktok-post-overlay">
+                                <svg viewBox="0 0 24 24" fill="white" style="width: 50px; height: 50px;">
+                                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                                </svg>
+                                <p style="color: white; margin-top: 0.5rem; font-weight: 600;">Voir sur TikTok</p>
+                            </div>
+                            <div class="tiktok-play-button">
+                                <svg viewBox="0 0 24 24" fill="white" style="width: 60px; height: 60px;">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+                `;
+                
+                // Démarrer la vidéo au survol
+                const videoElement = embedContainer.querySelector('.tiktok-post-video');
+                const container = embedContainer.querySelector('.tiktok-post-video-container');
+                if (videoElement && container) {
+                    container.addEventListener('mouseenter', () => {
+                        videoElement.play().catch(() => {});
+                    });
+                    container.addEventListener('mouseleave', () => {
+                        videoElement.pause();
+                        videoElement.currentTime = 0;
+                    });
+                }
+            }
+            
+            // Fonction pour afficher l'erreur
+            function displayError() {
+                embedContainer.innerHTML = `
+                    <div style="text-align: center; padding: 3rem 2rem;">
+                        <svg viewBox="0 0 24 24" fill="currentColor" style="width: 60px; height: 60px; color: #FF0050; margin-bottom: 1rem;">
+                            <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                        </svg>
+                        <h3 style="color: var(--primary-cyan); margin-bottom: 1rem; font-size: 1.5rem; font-weight: 700;">@${username}</h3>
+                        <p style="color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.6;">
+                            Impossible de charger automatiquement la dernière publication.<br>
+                            <a href="${tiktokProfileUrl}" target="_blank" style="color: var(--primary-cyan); text-decoration: underline; font-weight: 600;">
+                                Voir le profil TikTok →
+                            </a>
+                        </p>
+                    </div>
+                `;
+            }
+            
+            try {
+                // Utiliser un proxy CORS pour récupérer les données TikTok
+                const corsProxy = 'https://api.allorigins.win/get?url=';
+                const tiktokUrl = encodeURIComponent(tiktokProfileUrl);
+                
+                const response = await fetch(corsProxy + tiktokUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (!response.ok) throw new Error('Erreur de réponse du proxy');
+                
+                const data = await response.json();
+                if (!data.contents) throw new Error('Aucun contenu reçu');
+                
+                // Parser le HTML pour extraire les données JSON
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(data.contents, 'text/html');
+                
+                // Chercher les scripts qui contiennent les données JSON
+                const scripts = doc.querySelectorAll('script');
+                let postData = null;
+                
+                // TikTok stocke les données dans window.__UNIVERSAL_DATA_FOR_REHYDRATION__
+                for (const script of scripts) {
+                    const content = script.textContent || '';
+                    
+                    // Format 1: window.__UNIVERSAL_DATA_FOR_REHYDRATION__
+                    if (content.includes('__UNIVERSAL_DATA_FOR_REHYDRATION__')) {
+                        try {
+                            const match = content.match(/window\.__UNIVERSAL_DATA_FOR_REHYDRATION__\s*=\s*({.+?});/s);
+                            if (match) {
+                                const jsonData = JSON.parse(match[1]);
+                                // Chercher les données du profil et la première vidéo
+                                if (jsonData['__DEFAULT_SCOPE__']?.['webapp.user-detail']?.userInfo?.user?.videoList) {
+                                    const videoList = jsonData['__DEFAULT_SCOPE__']['webapp.user-detail'].userInfo.user.videoList;
+                                    if (videoList && videoList.length > 0) {
+                                        postData = videoList[0];
+                                        break;
+                                    }
+                                }
+                            }
+                        } catch (e) {
+                            console.log('Erreur format 1:', e);
+                        }
+                    }
+                    
+                    // Format 2: Données dans les balises script avec type application/json
+                    if (content.includes('"videoList"') && !postData) {
+                        try {
+                            const match = content.match(/"videoList":\s*\[([^\]]+)\]/);
+                            if (match) {
+                                const videoMatch = match[1].match(/\{([^}]+"id"[^}]+)\}/);
+                                if (videoMatch) {
+                                    const videoData = JSON.parse('{' + videoMatch[1] + '}');
+                                    postData = videoData;
+                                    break;
+                                }
+                            }
+                        } catch (e) {
+                            console.log('Erreur format 2:', e);
+                        }
+                    }
+                }
+                
+                if (postData) {
+                    const videoUrl = postData.downloadAddr || postData.video?.downloadAddr || postData.videoUrl;
+                    const coverUrl = postData.cover || postData.coverUrl || postData.dynamicCover;
+                    const videoId = postData.id || postData.videoId;
+                    const postUrl = videoId ? `https://www.tiktok.com/@${username}/video/${videoId}` : tiktokProfileUrl;
+                    
+                    if (videoUrl) {
+                        displayPost(videoUrl, postUrl, coverUrl);
+                        return;
+                    }
+                }
+                
+                throw new Error('Aucune vidéo trouvée');
+            } catch (error) {
+                console.error('Erreur lors du chargement de la publication TikTok:', error);
+                displayError();
+            }
+        }
+
+        // Initialize TikTok widget when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeTikTokWidget);
+        } else {
+            initializeTikTokWidget();
+        }
+
+        // Instagram Embed Initialization - Force reload if needed
+        function initializeInstagramEmbed() {
+            // Vérifier si le script Instagram est déjà chargé
+            if (window.instgrm) {
+                window.instgrm.Embeds.process();
+            } else {
+                // Attendre que le script soit chargé
+                const checkInstgrm = setInterval(() => {
+                    if (window.instgrm) {
+                        window.instgrm.Embeds.process();
+                        clearInterval(checkInstgrm);
+                    }
+                }, 100);
+                
+                // Timeout après 5 secondes
+                setTimeout(() => {
+                    clearInterval(checkInstgrm);
+                }, 5000);
+            }
+        }
+
+        // Initialize Instagram embed when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeInstagramEmbed);
+        } else {
+            initializeInstagramEmbed();
+        }
+        
+        // Réessayer après un court délai pour s'assurer que le script est chargé
+        setTimeout(initializeInstagramEmbed, 1000);

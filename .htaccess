@@ -1,30 +1,19 @@
+# Fichier .htaccess désactivé - cause d'erreur 500 sur Free.fr
+# Pour réactiver, décommenter les règles ci-dessous une par une en testant
+
 # Redirection HTTPS - Décommenter quand le certificat SSL sera activé
-# Actuellement désactivé car le site fonctionne en HTTP
 # RewriteEngine On
 # RewriteCond %{HTTPS} off [OR]
 # RewriteCond %{HTTP_HOST} !^rollerdancestyle\.free\.fr$ [NC]
 # RewriteRule ^(.*)$ https://rollerdancestyle.free.fr%{REQUEST_URI} [L,R=301]
 
 # HSTS (HTTP Strict Transport Security) - Sécurité supplémentaire
-# Décommenter quand HTTPS sera activé
 # <IfModule mod_headers.c>
 #     Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
 # </IfModule>
 
-# Bloquer l'accès des robots au dossier images
-<IfModule mod_rewrite.c>
-    RewriteEngine On
-    
-    # Bloquer les bots connus au dossier images (User-Agent contenant bot, crawl, spider, etc.)
-    RewriteCond %{REQUEST_URI} ^/images/ [NC]
-    RewriteCond %{HTTP_USER_AGENT} (bot|crawl|spider|scraper|wget|curl|python|java|perl|ruby|php|node|go|rust|downloader|httrack|teleport|nikto|sqlmap|nmap|scanner) [NC]
-    RewriteRule ^images/.*$ - [F,L]
-    
-    # Bloquer les accès directs suspects au dossier images (sans référent ET User-Agent suspect)
-    RewriteCond %{REQUEST_URI} ^/images/ [NC]
-    RewriteCond %{HTTP_REFERER} ^$ [NC]
-    RewriteCond %{HTTP_USER_AGENT} !^$ [NC]
-    RewriteCond %{HTTP_USER_AGENT} !(mozilla|chrome|safari|firefox|edge|opera|msie|webkit) [NC]
-    RewriteRule ^images/.*$ - [F,L]
-</IfModule>
+# Protection des images via robots.txt uniquement (plus compatible Free.fr)
 
+# Redirection HTTPS vers HTTP désactivée - cause d'erreur 500 sur Free.fr
+# Les règles mod_rewrite ne sont pas supportées ou fonctionnent différemment
+# Solution : gérer la redirection au niveau DNS/configuration serveur si nécessaire
